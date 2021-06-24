@@ -24,7 +24,7 @@ const temperatureConverter = (farenheit) => Math.round((farenheit - 32) / 1.8);
 
 checkWeatherBtn.addEventListener("click", () => {
   fetch(
-    `http://dataservice.accuweather.com/locations/v1/cities/search?apikey=7G7aXU4h0HhOxh3j6pXbef6cmg4NGt6a&q=${cityName.value}`
+    `https://dataservice.accuweather.com/locations/v1/cities/search?apikey=7G7aXU4h0HhOxh3j6pXbef6cmg4NGt6a&q=${cityName.value}`
   )
     .then((res) => res.json())
     .then((data) => {
@@ -50,7 +50,7 @@ checkWeatherBtn.addEventListener("click", () => {
               cityChooseDiv.innerHTML = '';
               cityChooseDiv.classList.remove("city-choose__fade");
               fetch(
-                `http://dataservice.accuweather.com/forecasts/v1/hourly/1hour/${data[cityIndex].Key}?apikey=7G7aXU4h0HhOxh3j6pXbef6cmg4NGt6a&language=pl-PL`
+                `https://dataservice.accuweather.com/forecasts/v1/hourly/1hour/${data[cityIndex].Key}?apikey=7G7aXU4h0HhOxh3j6pXbef6cmg4NGt6a&language=pl-PL`
               )
                 .then((res) => res.json())
                 .then((city) => {
@@ -69,7 +69,7 @@ checkWeatherBtn.addEventListener("click", () => {
       else
       {
         fetch(
-          `http://dataservice.accuweather.com/forecasts/v1/hourly/1hour/${data[cityIndex].Key}?apikey=7G7aXU4h0HhOxh3j6pXbef6cmg4NGt6a&language=pl-PL`
+          `https://dataservice.accuweather.com/forecasts/v1/hourly/1hour/${data[cityIndex].Key}?apikey=7G7aXU4h0HhOxh3j6pXbef6cmg4NGt6a&language=pl-PL`
         )
           .then((res) => res.json())
           .then((city) => {
