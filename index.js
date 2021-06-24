@@ -20,6 +20,8 @@ const cityCardToChoose = (city, region) => {
 
 const cityChoose = () => {};
 
+const temperatureConverter = (farenheit) => Math.round((farenheit - 32) / 1.8);
+
 checkWeatherBtn.addEventListener("click", () => {
   fetch(
     `http://dataservice.accuweather.com/locations/v1/cities/search?apikey=7G7aXU4h0HhOxh3j6pXbef6cmg4NGt6a&q=${cityName.value}`
@@ -56,7 +58,7 @@ checkWeatherBtn.addEventListener("click", () => {
                   newCityTab.className = "city-container";
                   newCityTab.innerHTML = cityInformations(
                     data[cityIndex].EnglishName,
-                    city[cityIndex].Temperature.Value
+                    temperatureConverter(city[cityIndex].Temperature.Value)
                   );
                   citiesWrapper.appendChild(newCityTab);
                 });
@@ -75,7 +77,7 @@ checkWeatherBtn.addEventListener("click", () => {
             newCityTab.className = "city-container";
             newCityTab.innerHTML = cityInformations(
               data[cityIndex].EnglishName,
-              city[cityIndex].Temperature.Value
+              temperatureConverter(city[cityIndex].Temperature.Value)
             );
             citiesWrapper.appendChild(newCityTab);
           });
