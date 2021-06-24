@@ -15,12 +15,29 @@ const cityInformations = (city, temperature = 0) => {
 
 const cityCardToChoose = (city, region) => {
   return `<span class="city-name">${city}</span>
-  <span class="temperature">${region}</span>;`;
+  <span class="city-region">${region}</span>;`;
 };
 
 const cityChoose = () => {};
 
 const temperatureConverter = (farenheit) => Math.round((farenheit - 32) / 1.8);
+
+const cityTemperatureFetch = (data, cityIndex = 0) => {
+  fetch(
+    `https://dataservice.accuweather.com/forecasts/v1/hourly/1hour/${data[cityIndex].Key}?apikey=7G7aXU4h0HhOxh3j6pXbef6cmg4NGt6a&language=pl-PL`
+  )
+    .then((res) => res.json())
+    .then((city) => {
+      const [cityDes] = city;
+      const newCityTab = document.createElement("div");
+      newCityTab.className = "city-container";
+      newCityTab.innerHTML = cityInformations(
+        data[cityIndex].EnglishName,
+        temperatureConverter(cityDes.Temperature.Value)
+      );
+      citiesWrapper.appendChild(newCityTab);
+    });
+};
 
 checkWeatherBtn.addEventListener("click", () => {
   fetch(
@@ -28,10 +45,9 @@ checkWeatherBtn.addEventListener("click", () => {
   )
     .then((res) => res.json())
     .then((data) => {
-      let cityIndex = 0;
       if (data.length > 1) {
         cityChooseDiv.classList.add("city-choose__fade");
-        data.forEach( (el) => {
+        data.forEach((el) => {
           const cityToChoose = document.createElement("div");
           cityToChoose.className = "city-to-choose";
           cityToChoose.innerHTML = cityCardToChoose(
@@ -39,48 +55,20 @@ checkWeatherBtn.addEventListener("click", () => {
             el.AdministrativeArea.EnglishName
           );
           cityChooseDiv.appendChild(cityToChoose);
-        })
+        });
         cityChooseDiv.onclick = (e) => {
           const target = e.target;
           const citiesDivTable = document.querySelectorAll(".city-to-choose");
-          citiesDivTable.forEach( (el, index) => {
-            if(el === target)
-            {
-              cityIndex = index;
-              cityChooseDiv.innerHTML = '';
+          citiesDivTable.forEach((el, index) => {
+            if (el === target) {
+              cityChooseDiv.innerHTML = "";
               cityChooseDiv.classList.remove("city-choose__fade");
-              fetch(
-                `https://dataservice.accuweather.com/forecasts/v1/hourly/1hour/${data[cityIndex].Key}?apikey=7G7aXU4h0HhOxh3j6pXbef6cmg4NGt6a&language=pl-PL`
-              )
-                .then((res) => res.json())
-                .then((city) => {
-                  const newCityTab = document.createElement("div");
-                  newCityTab.className = "city-container";
-                  newCityTab.innerHTML = cityInformations(
-                    data[cityIndex].EnglishName,
-                    temperatureConverter(city[cityIndex].Temperature.Value)
-                  );
-                  citiesWrapper.appendChild(newCityTab);
-                });
+              cityTemperatureFetch(data, index);
             }
           });
         };
-      } 
-      else
-      {
-        fetch(
-          `https://dataservice.accuweather.com/forecasts/v1/hourly/1hour/${data[cityIndex].Key}?apikey=7G7aXU4h0HhOxh3j6pXbef6cmg4NGt6a&language=pl-PL`
-        )
-          .then((res) => res.json())
-          .then((city) => {
-            const newCityTab = document.createElement("div");
-            newCityTab.className = "city-container";
-            newCityTab.innerHTML = cityInformations(
-              data[cityIndex].EnglishName,
-              temperatureConverter(city[cityIndex].Temperature.Value)
-            );
-            citiesWrapper.appendChild(newCityTab);
-          });
+      } else {
+        cityTemperatureFetch(data);
       }
     });
 });
