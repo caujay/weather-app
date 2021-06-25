@@ -28,6 +28,17 @@
     color: #fff;
     font-size: 50px; }
 
+.city-input {
+  left: calc(50% - 250px);
+  top: 20px;
+  position: relative;
+  width: 500px;
+  height: 100px; }
+  .city-input input {
+    width: 400px; }
+  .city-input button {
+    border: none; }
+
 .city-to-choose {
   margin: 50px;
   width: 400px;

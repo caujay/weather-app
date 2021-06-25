@@ -1,7 +1,5 @@
 const wrapContainer = document.querySelector(".wrap-container");
-const cityInput = document.querySelector(".city-input");
 const citiesWrapper = document.querySelector(".cities-wrapper");
-const submitBtn = document.querySelector("#submit-btn");
 const cityName = document.querySelector(".city-name");
 const checkWeatherBtn = document.querySelector(".check-weather-btn");
 const cityChooseDiv = document.querySelector(".city-choose");
@@ -61,7 +59,7 @@ const cityChoose = (data) => {
   };
 };
 
-checkWeatherBtn.addEventListener("click", () => {
+export const checkWeather = () => {
   fetch(
     `https://dataservice.accuweather.com/locations/v1/cities/search?apikey=7G7aXU4h0HhOxh3j6pXbef6cmg4NGt6a&q=${cityName.value}`
   )
@@ -73,7 +71,9 @@ checkWeatherBtn.addEventListener("click", () => {
         cityTemperatureFetch(data);
       }
     });
-});
+};
+
+checkWeatherBtn.addEventListener("click", checkWeather);
 
 wrapContainer.onclick = (e) => {
   let target = e.target;
