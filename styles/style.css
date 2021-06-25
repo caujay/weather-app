@@ -58,13 +58,17 @@
       text-align: center;
       line-height: 50px; }
     .city-input .check-weather-btn:hover {
+      transition: 0.3s;
+      box-shadow: none;
+      cursor: pointer; }
+    .city-input .check-weather-btn:active {
       transform: translateX(2.5px);
       transform: translateY(2.5px);
       transition: 0.3s;
       width: 195px;
       height: 45px;
-      box-shadow: none; }
-      .city-input .check-weather-btn:hover p {
+      box-shadow: inset 0 0 4px black; }
+      .city-input .check-weather-btn:active p {
         font-size: 17px;
         transition: 0.3s;
         line-height: 45px; }

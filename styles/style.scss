@@ -69,12 +69,18 @@ $grey-color: #808080;
     }
 
     &:hover {
+      transition: 0.3s;
+      box-shadow: none;
+      cursor: pointer;
+    }
+
+    &:active {
       transform: translateX(2.5px);
       transform: translateY(2.5px);
       transition: 0.3s;
       width: 195px;
       height: 45px;
-      box-shadow: none;
+      box-shadow: inset 0 0 4px rgba(0, 0, 0, 1);
       p {
         font-size: 17px;
         transition: 0.3s;
