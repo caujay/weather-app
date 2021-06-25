@@ -1,4 +1,5 @@
-$font-size: 50px;
+$font-size: 20px;
+$grey-color: #808080;
 
 * {
   margin: 0;
@@ -41,22 +42,56 @@ $font-size: 50px;
 }
 
 .city-input {
+  input {
+    text-align: center;
+    border-radius: 15px;
+    border: 0px;
+    display: block;
+    width: 400px;
+    height: 40px;
+    margin: 0 auto;
+  }
+  .check-weather-btn {
+    transition: 0.3s;
+    position: relative;
+    background: #fff;
+    width: 200px;
+    height: 50px;
+    display: block;
+    margin: 20px auto;
+    border-radius: 15px;
+    box-shadow: 2px 5px rgba(0, 0, 0, 0.2);
+    p {
+      font-size: 18px;
+      transition: 0.3s;
+      text-align: center;
+      line-height: 50px;
+    }
+
+    &:hover {
+      transform: translateX(2.5px);
+      transform: translateY(2.5px);
+      transition: 0.3s;
+      width: 195px;
+      height: 45px;
+      box-shadow: none;
+      p {
+        font-size: 17px;
+        transition: 0.3s;
+        line-height: 45px;
+      }
+    }
+  }
   left: calc(50% - 250px);
   top: 20px;
   position: relative;
   width: 500px;
   height: 100px;
-  input {
-    width: 400px;
-  }
-  button {
-    border: none;
-  }
 }
 .city-to-choose {
   margin: 50px;
-  width: 400px;
-  height: 500px;
+  width: 200px;
+  height: 100px;
   border-radius: 15px;
   background: #fff;
   .city-name,

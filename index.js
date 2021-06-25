@@ -4,16 +4,20 @@ const cityName = document.querySelector(".city-name");
 const checkWeatherBtn = document.querySelector(".check-weather-btn");
 const cityChooseDiv = document.querySelector(".city-choose");
 
-const cityInformations = (city, temperature = 0) => {
+const cityInformations = (city, region, country, temperature = 0) => {
   return `<span class="city-name">${city}</span>
+  <span class="city-region">${region}</span>
+  <span class="city-country">${country}</span>
   <img class="weather" alt="" src="" />
   <span class="temperature">${temperature}</span>
   <button class="del-btn">-</button>`;
 };
 
-const cityCardToChoose = (city, region) => {
+const cityCardToChoose = (city, region, country) => {
   return `<span class="city-name">${city}</span>
-  <span class="city-region">${region}</span>;`;
+  <span class="city-region">${region}</span>
+  <span class="city-country">${country}</span>
+  `;
 };
 
 const temperatureConverter = (farenheit) => Math.round((farenheit - 32) / 1.8);
@@ -29,6 +33,8 @@ const cityTemperatureFetch = (data, cityIndex = 0) => {
       newCityTab.className = "city-container";
       newCityTab.innerHTML = cityInformations(
         data[cityIndex].EnglishName,
+        data[cityIndex].AdministrativeArea.LocalizedName,
+        data[cityIndex].Country.LocalizedName,
         temperatureConverter(cityDes.Temperature.Value)
       );
       citiesWrapper.appendChild(newCityTab);
@@ -41,8 +47,9 @@ const cityChoose = (data) => {
     const cityToChoose = document.createElement("div");
     cityToChoose.className = "city-to-choose";
     cityToChoose.innerHTML = cityCardToChoose(
-      el.EnglishName,
-      el.AdministrativeArea.EnglishName
+      el.LocalizedName,
+      el.AdministrativeArea.LocalizedName,
+      el.Country.LocalizedName
     );
     cityChooseDiv.appendChild(cityToChoose);
   });
@@ -61,7 +68,7 @@ const cityChoose = (data) => {
 
 export const checkWeather = () => {
   fetch(
-    `https://dataservice.accuweather.com/locations/v1/cities/search?apikey=7G7aXU4h0HhOxh3j6pXbef6cmg4NGt6a&q=${cityName.value}`
+    `https://dataservice.accuweather.com/locations/v1/cities/search?apikey=7G7aXU4h0HhOxh3j6pXbef6cmg4NGt6a&q=${cityName.value}&language=pl-PL`
   )
     .then((res) => res.json())
     .then((data) => {
