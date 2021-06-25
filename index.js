@@ -18,8 +18,6 @@ const cityCardToChoose = (city, region) => {
   <span class="city-region">${region}</span>;`;
 };
 
-const cityChoose = () => {};
-
 const temperatureConverter = (farenheit) => Math.round((farenheit - 32) / 1.8);
 
 const cityTemperatureFetch = (data, cityIndex = 0) => {
@@ -39,6 +37,30 @@ const cityTemperatureFetch = (data, cityIndex = 0) => {
     });
 };
 
+const cityChoose = (data) => {
+  cityChooseDiv.classList.add("city-choose__fade");
+  data.forEach((el) => {
+    const cityToChoose = document.createElement("div");
+    cityToChoose.className = "city-to-choose";
+    cityToChoose.innerHTML = cityCardToChoose(
+      el.EnglishName,
+      el.AdministrativeArea.EnglishName
+    );
+    cityChooseDiv.appendChild(cityToChoose);
+  });
+  cityChooseDiv.onclick = (e) => {
+    const target = e.target;
+    const citiesDivTable = document.querySelectorAll(".city-to-choose");
+    citiesDivTable.forEach((el, index) => {
+      if (el === target) {
+        cityChooseDiv.innerHTML = "";
+        cityChooseDiv.classList.remove("city-choose__fade");
+        cityTemperatureFetch(data, index);
+      }
+    });
+  };
+};
+
 checkWeatherBtn.addEventListener("click", () => {
   fetch(
     `https://dataservice.accuweather.com/locations/v1/cities/search?apikey=7G7aXU4h0HhOxh3j6pXbef6cmg4NGt6a&q=${cityName.value}`
@@ -46,27 +68,7 @@ checkWeatherBtn.addEventListener("click", () => {
     .then((res) => res.json())
     .then((data) => {
       if (data.length > 1) {
-        cityChooseDiv.classList.add("city-choose__fade");
-        data.forEach((el) => {
-          const cityToChoose = document.createElement("div");
-          cityToChoose.className = "city-to-choose";
-          cityToChoose.innerHTML = cityCardToChoose(
-            el.EnglishName,
-            el.AdministrativeArea.EnglishName
-          );
-          cityChooseDiv.appendChild(cityToChoose);
-        });
-        cityChooseDiv.onclick = (e) => {
-          const target = e.target;
-          const citiesDivTable = document.querySelectorAll(".city-to-choose");
-          citiesDivTable.forEach((el, index) => {
-            if (el === target) {
-              cityChooseDiv.innerHTML = "";
-              cityChooseDiv.classList.remove("city-choose__fade");
-              cityTemperatureFetch(data, index);
-            }
-          });
-        };
+        cityChoose(data);
       } else {
         cityTemperatureFetch(data);
       }
