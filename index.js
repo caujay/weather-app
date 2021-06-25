@@ -3,6 +3,7 @@ const citiesWrapper = document.querySelector(".cities-wrapper");
 const cityName = document.querySelector(".city-name");
 const checkWeatherBtn = document.querySelector(".check-weather-btn");
 const cityChooseDiv = document.querySelector(".city-choose");
+const errHandler = document.querySelector(".error-handler");
 
 const cityInformations = (city, region, country, temperature = 0) => {
   return `<span class="city-name">${city}</span>
@@ -77,6 +78,14 @@ export const checkWeather = () => {
       } else {
         cityTemperatureFetch(data);
       }
+    })
+    .catch((err) => {
+      console.log(err, "Cannot find city in the data base");
+      console.log("err");
+      errHandler.classList.add("error-handler__display");
+      setTimeout(() => {
+        errHandler.classList.remove("error-handler__display");
+      }, 3000);
     });
 };
 

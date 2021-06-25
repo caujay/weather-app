@@ -101,16 +101,34 @@ $grey-color: #808080;
 }
 .city-choose {
   position: absolute;
-  height: 0;
-  width: 0;
+  visibility: hidden;
+  background: rgba(51, 51, 51, 0.5);
+  height: 100vh;
+  width: 100vw;
   opacity: 0;
   transition: all 0.6s;
 }
 
 .city-choose__fade {
-  background: rgba(51, 51, 51, 0.5);
-  height: 100vh;
-  width: 100vw;
+  visibility: visible;
   opacity: 1;
   transition: all 0.6s;
+}
+
+.error-handler {
+  visibility: hidden;
+  opacity: 0;
+  transition: 0.6s;
+  top: calc(50% - 50px);
+  left: calc(50% - 100px);
+  position: absolute;
+  width: 200px;
+  height: 100px;
+  background-color: orange;
+}
+
+.error-handler__display {
+  visibility: visible;
+  opacity: 1;
+  transition: 0.6s;
 }
