@@ -43,6 +43,7 @@
     height: 40px;
     margin: 0 auto; }
   .city-input .check-weather-btn {
+    cursor: pointer;
     transition: 0.3s;
     position: relative;
     background: #fff;
@@ -59,8 +60,7 @@
       line-height: 50px; }
     .city-input .check-weather-btn:hover {
       transition: 0.3s;
-      box-shadow: none;
-      cursor: pointer; }
+      box-shadow: none; }
     .city-input .check-weather-btn:active {
       transform: translateX(2.5px);
       transform: translateY(2.5px);
@@ -74,16 +74,43 @@
         line-height: 45px; }
 
 .city-to-choose {
-  margin: 50px;
-  width: 200px;
+  cursor: pointer;
+  transition: 0.3s;
+  display: block;
+  margin: 50px auto;
+  width: 400px;
   height: 100px;
   border-radius: 15px;
-  background: #fff; }
+  background: #fff;
+  box-shadow: 4px 5px rgba(0, 0, 0, 0.2); }
   .city-to-choose .city-name,
-  .city-to-choose .city-region {
-    font-size: 20px; }
+  .city-to-choose .city-region,
+  .city-to-choose .city-country {
+    line-height: 30px;
+    display: block;
+    text-align: center;
+    font-size: 20px;
+    transition: 0.3s; }
+  .city-to-choose .city-name {
+    font-size: 22px; }
+  .city-to-choose:hover {
+    transition: 0.3s;
+    box-shadow: none; }
+  .city-to-choose:active {
+    transition: 0.3s;
+    width: 390px;
+    height: 95px;
+    box-shadow: inset 0 0 4px black; }
+    .city-to-choose:active .city-country,
+    .city-to-choose:active .city-region {
+      line-height: 30px;
+      font-size: 18px;
+      transition: 0.3s; }
+    .city-to-choose:active .city-name {
+      font-size: 20px; }
 
 .city-choose {
+  z-index: 1;
   position: absolute;
   visibility: hidden;
   background: rgba(51, 51, 51, 0.5);
@@ -101,12 +128,20 @@
   visibility: hidden;
   opacity: 0;
   transition: 0.6s;
-  top: calc(50% - 50px);
-  left: calc(50% - 100px);
+  top: calc(45% - 75px);
+  left: calc(50% - 200px);
   position: absolute;
-  width: 200px;
-  height: 100px;
-  background-color: orange; }
+  width: 400px;
+  height: 150px;
+  background-color: orange;
+  border-radius: 15px; }
+  .error-handler p {
+    font-size: 24px;
+    text-align: center;
+    padding: 10px; }
+  .error-handler .error-handler-alert {
+    font-size: 28px;
+    padding-top: 25px; }
 
 .error-handler__display {
   visibility: visible;

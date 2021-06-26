@@ -58,7 +58,7 @@ const cityChoose = (data) => {
     const target = e.target;
     const citiesDivTable = document.querySelectorAll(".city-to-choose");
     citiesDivTable.forEach((el, index) => {
-      if (el === target) {
+      if (el === target.parentNode) {
         cityChooseDiv.innerHTML = "";
         cityChooseDiv.classList.remove("city-choose__fade");
         cityTemperatureFetch(data, index);

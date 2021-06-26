@@ -52,6 +52,7 @@ $grey-color: #808080;
     margin: 0 auto;
   }
   .check-weather-btn {
+    cursor: pointer;
     transition: 0.3s;
     position: relative;
     background: #fff;
@@ -71,7 +72,6 @@ $grey-color: #808080;
     &:hover {
       transition: 0.3s;
       box-shadow: none;
-      cursor: pointer;
     }
 
     &:active {
@@ -95,17 +95,55 @@ $grey-color: #808080;
   height: 100px;
 }
 .city-to-choose {
-  margin: 50px;
-  width: 200px;
+  cursor: pointer;
+  transition: 0.3s;
+  display: block;
+  margin: 50px auto;
+  width: 400px;
   height: 100px;
   border-radius: 15px;
   background: #fff;
+  box-shadow: 4px 5px rgba(0, 0, 0, 0.2);
+
   .city-name,
-  .city-region {
+  .city-region,
+  .city-country {
+    line-height: 30px;
+    display: block;
+    text-align: center;
     font-size: $font-size;
+    transition: 0.3s;
+  }
+
+  .city-name {
+    font-size: 22px;
+  }
+
+  &:hover {
+    transition: 0.3s;
+    box-shadow: none;
+  }
+
+  &:active {
+    transition: 0.3s;
+    width: 390px;
+    height: 95px;
+    box-shadow: inset 0 0 4px rgba(0, 0, 0, 1);
+
+    .city-country,
+    .city-region {
+      line-height: 30px;
+      font-size: 18px;
+      transition: 0.3s;
+    }
+
+    .city-name {
+      font-size: 20px;
+    }
   }
 }
 .city-choose {
+  z-index: 1;
   position: absolute;
   visibility: hidden;
   background: rgba(51, 51, 51, 0.5);
@@ -116,6 +154,7 @@ $grey-color: #808080;
 }
 
 .city-choose__fade {
+  //overflow: auto;
   visibility: visible;
   opacity: 1;
   transition: all 0.6s;
@@ -125,12 +164,22 @@ $grey-color: #808080;
   visibility: hidden;
   opacity: 0;
   transition: 0.6s;
-  top: calc(50% - 50px);
-  left: calc(50% - 100px);
+  top: calc(45% - 75px);
+  left: calc(50% - 200px);
   position: absolute;
-  width: 200px;
-  height: 100px;
+  width: 400px;
+  height: 150px;
   background-color: orange;
+  border-radius: 15px;
+  p {
+    font-size: 24px;
+    text-align: center;
+    padding: 10px;
+  }
+  .error-handler-alert {
+    font-size: 28px;
+    padding-top: 25px;
+  }
 }
 
 .error-handler__display {
