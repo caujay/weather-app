@@ -10,30 +10,57 @@
   background: #833ab4;
   background: linear-gradient(120deg, #833ab4 0%, #fd1d1d 50%, #fcb045 100%); }
 
+.cities-wrapper {
+  height: calc(100vh - 170px);
+  width: 100vw;
+  text-align: center;
+  overflow: scroll; }
+
 .city-container {
+  transition: 0.3s;
+  display: inline-block;
   margin: 50px;
-  width: 400px;
-  height: 500px;
+  width: 200px;
+  height: 300px;
   border-radius: 15px;
   background: #fff; }
   .city-container .city-name,
-  .city-container .temperature {
-    font-size: 20px; }
+  .city-container .temperature,
+  .city-container .city-region,
+  .city-container .city-country {
+    display: block;
+    text-align: center;
+    font-size: 24px;
+    padding: 5px 0; }
+  .city-container .city-name {
+    padding-top: 10px; }
+  .city-container .weather {
+    margin: 0px auto; }
   .city-container .del-btn {
+    cursor: pointer;
+    display: block;
+    margin: 5px auto;
     background-color: #fd1d1d;
-    width: 150px;
-    height: 75px;
+    width: 120px;
+    height: 50px;
     border: 0px;
     border-radius: 15px;
-    color: #fff;
-    font-size: 50px; }
+    text-align: center;
+    box-shadow: 2px 2px rgba(0, 0, 0, 0.2); }
+    .city-container .del-btn .del-btn-span {
+      display: inline-block;
+      margin: 0 auto;
+      margin-top: 22px;
+      width: 40px;
+      height: 5px;
+      background-color: #fff;
+      border-radius: 15px; }
 
 .city-input {
-  left: calc(50% - 250px);
-  top: 20px;
+  padding-top: 20px;
   position: relative;
-  width: 500px;
-  height: 100px; }
+  width: 100vw;
+  height: 170px; }
   .city-input input {
     text-align: center;
     border-radius: 15px;
@@ -89,7 +116,7 @@
     line-height: 30px;
     display: block;
     text-align: center;
-    font-size: 20px;
+    font-size: 24px;
     transition: 0.3s; }
   .city-to-choose .city-name {
     font-size: 22px; }
@@ -120,6 +147,7 @@
   transition: all 0.6s; }
 
 .city-choose__fade {
+  overflow: auto;
   visibility: visible;
   opacity: 1;
   transition: all 0.6s; }

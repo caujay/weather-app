@@ -5,13 +5,19 @@ const checkWeatherBtn = document.querySelector(".check-weather-btn");
 const cityChooseDiv = document.querySelector(".city-choose");
 const errHandler = document.querySelector(".error-handler");
 
-const cityInformations = (city, region, country, temperature = 0) => {
+const cityInformations = (city, region, country, temperature = 0, icon = 0) => {
+  if (icon < 10) {
+    icon = "0" + icon;
+  }
+
   return `<span class="city-name">${city}</span>
   <span class="city-region">${region}</span>
   <span class="city-country">${country}</span>
-  <img class="weather" alt="" src="" />
-  <span class="temperature">${temperature}</span>
-  <button class="del-btn">-</button>`;
+  <img class="weather" alt="" src="/images/${icon}-s.png" />
+  <span class="temperature">${temperature}&#8451;</span>
+  <div class="del-btn">
+  <span class="del-btn-span"></span>
+  </div>`;
 };
 
 const cityCardToChoose = (city, region, country) => {
@@ -36,7 +42,8 @@ const cityTemperatureFetch = (data, cityIndex = 0) => {
         data[cityIndex].EnglishName,
         data[cityIndex].AdministrativeArea.LocalizedName,
         data[cityIndex].Country.LocalizedName,
-        temperatureConverter(cityDes.Temperature.Value)
+        temperatureConverter(cityDes.Temperature.Value),
+        cityDes.WeatherIcon
       );
       citiesWrapper.appendChild(newCityTab);
     });
@@ -93,7 +100,10 @@ checkWeatherBtn.addEventListener("click", checkWeather);
 
 wrapContainer.onclick = (e) => {
   let target = e.target;
-  if (target === document.querySelector(".del-btn")) {
-    target.parentNode.remove();
-  }
+  const delBtns = document.querySelectorAll(".del-btn");
+  delBtns.forEach((el) => {
+    if (el === target || el === target.parentNode) {
+      el.parentNode.remove();
+    }
+  });
 };

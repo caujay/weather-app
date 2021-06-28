@@ -1,4 +1,4 @@
-$font-size: 20px;
+$font-size: 24px;
 $grey-color: #808080;
 
 * {
@@ -20,24 +20,57 @@ $grey-color: #808080;
   );
 }
 
+.cities-wrapper {
+  height: calc(100vh - 170px);
+  width: 100vw;
+  text-align: center;
+  overflow: scroll;
+}
+
 .city-container {
+  transition: 0.3s;
+  display: inline-block;
   margin: 50px;
-  width: 400px;
-  height: 500px;
+  width: 200px;
+  height: 300px;
   border-radius: 15px;
   background: #fff;
   .city-name,
-  .temperature {
+  .temperature,
+  .city-region,
+  .city-country {
+    display: block;
+    text-align: center;
     font-size: $font-size;
+    padding: 5px 0;
+  }
+
+  .city-name {
+    padding-top: 10px;
+  }
+  .weather {
+    margin: 0px auto;
   }
   .del-btn {
+    cursor: pointer;
+    display: block;
+    margin: 5px auto;
     background-color: rgba(253, 29, 29, 1);
-    width: 150px;
-    height: 75px;
+    width: 120px;
+    height: 50px;
     border: 0px;
     border-radius: 15px;
-    color: #fff;
-    font-size: 50px;
+    text-align: center;
+    box-shadow: 2px 2px rgba(0, 0, 0, 0.2);
+    .del-btn-span {
+      display: inline-block;
+      margin: 0 auto;
+      margin-top: 22px;
+      width: 40px;
+      height: 5px;
+      background-color: #fff;
+      border-radius: 15px;
+    }
   }
 }
 
@@ -88,11 +121,10 @@ $grey-color: #808080;
       }
     }
   }
-  left: calc(50% - 250px);
-  top: 20px;
+  padding-top: 20px;
   position: relative;
-  width: 500px;
-  height: 100px;
+  width: 100vw;
+  height: 170px;
 }
 .city-to-choose {
   cursor: pointer;
@@ -154,7 +186,7 @@ $grey-color: #808080;
 }
 
 .city-choose__fade {
-  //overflow: auto;
+  overflow: auto;
   visibility: visible;
   opacity: 1;
   transition: all 0.6s;
