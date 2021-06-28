@@ -13,7 +13,7 @@ const cityInformations = (city, region, country, temperature = 0, icon = 0) => {
   return `<span class="city-name">${city}</span>
   <span class="city-region">${region}</span>
   <span class="city-country">${country}</span>
-  <img class="weather" alt="" src="/images/${icon}-s.png" />
+  <img class="weather" alt="" src="images/${icon}-s.png" />
   <span class="temperature">${temperature}&#8451;</span>
   <div class="del-btn">
   <span class="del-btn-span"></span>
