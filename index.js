@@ -4,6 +4,9 @@ const cityName = document.querySelector(".city-name");
 const checkWeatherBtn = document.querySelector(".check-weather-btn");
 const cityChooseDiv = document.querySelector(".city-choose");
 const errHandler = document.querySelector(".error-handler");
+const errHandlerTxt = document.querySelector(".error-handler-text");
+
+const addedCities = [];
 
 const cityInformations = (city, region, country, temperature = 0, icon = 0) => {
   if (icon < 10) {
@@ -27,6 +30,13 @@ const cityCardToChoose = (city, region, country) => {
   `;
 };
 
+const removeCityFromArr = (value) => {
+  let index = addedCities.indexOf(value);
+  if (index > -1) {
+    addedCities.splice(index, 1);
+  }
+};
+
 const temperatureConverter = (farenheit) => Math.round((farenheit - 32) / 1.8);
 
 const cityTemperatureFetch = (data, cityIndex = 0) => {
@@ -38,6 +48,7 @@ const cityTemperatureFetch = (data, cityIndex = 0) => {
       const [cityDes] = city;
       const newCityTab = document.createElement("div");
       newCityTab.className = "city-container";
+      newCityTab.dataset.key = `${data[cityIndex].Key}`;
       newCityTab.innerHTML = cityInformations(
         data[cityIndex].EnglishName,
         data[cityIndex].AdministrativeArea.LocalizedName,
@@ -68,7 +79,17 @@ const cityChoose = (data) => {
       if (el === target.parentNode) {
         cityChooseDiv.innerHTML = "";
         cityChooseDiv.classList.remove("city-choose__fade");
-        cityTemperatureFetch(data, index);
+        if (addedCities.includes(data[index].Key)) {
+          errHandlerTxt.innerHTML = "Podane miasto zostało już dodane!";
+          errHandler.classList.add("error-handler__display");
+          setTimeout(() => {
+            errHandler.classList.remove("error-handler__display");
+            errHandlerTxt.innerHTML = "";
+          }, 3000);
+        } else {
+          cityTemperatureFetch(data, index);
+          addedCities.push(data[index].Key);
+        }
       }
     });
   };
@@ -89,9 +110,11 @@ export const checkWeather = () => {
     .catch((err) => {
       console.log(err, "Cannot find city in the data base");
       console.log("err");
+      errHandlerTxt.innerHTML = "Wpisz poprawną nazwę miasta!";
       errHandler.classList.add("error-handler__display");
       setTimeout(() => {
         errHandler.classList.remove("error-handler__display");
+        errHandlerTxt.innerHTML = "";
       }, 3000);
     });
 };
@@ -103,6 +126,7 @@ wrapContainer.onclick = (e) => {
   const delBtns = document.querySelectorAll(".del-btn");
   delBtns.forEach((el) => {
     if (el === target || el === target.parentNode) {
+      removeCityFromArr(el.parentNode.dataset.key);
       el.parentNode.remove();
     }
   });
